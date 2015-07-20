@@ -27,11 +27,11 @@ The dependent variable is the time it takes to name the ink colors.
 
 
 ###2. What is an appropriate set of hypotheses for this task?
-The null hypothesis is that the difference between each subject's congruent (µ<sub>1</sub>) and incongruent (µ<sub>2</sub>) tests will not be significant.
-$$ µ_{∆} = µ_{2} - µ_{1} $$
-$$ H_{0}: µ_{∆} = 0 $$
-The alternative hypothesis is that the difference between each subject's congruent and incongruent tests will be significant.
-$$ H_{A}: µ_{∆} \neq 0 $$
+The null hypothesis is that the difference between each subject's congruent (µ<sub>1</sub>) and incongruent (µ<sub>2</sub>) tests will not be significant. <br/>
+µ<sub>∆</sub> = µ<sub>2</sub> - µ<sub>1</sub> <br/>
+H<sub>0</sub>: µ<sub>∆</sub> = 0 <br/>
+The alternative hypothesis is that the difference between each subject's congruent and incongruent tests will be significant. <br/>
+H<sub>A</sub>: µ<sub>∆</sub> \neq 0
 ####What kind of statistical test do you expect to perform? Justify your choices.
 I expect to perform the dependent t-test for paired samples since the two samples are paired. The samples are paired since each subject does both tests, which means we know the difference in each subjects scores.
 In order to use this test the data needs to be normally distributed.
@@ -43,22 +43,22 @@ ref: https://en.wikipedia.org/wiki/Student%27s_t-test#Paired_samples
 Now it’s your chance to try out the Stroop task for yourself. Go to this link, which has a Java-based applet for performing the Stroop task. Record the times that you received on the task (you do not need to submit your times to the site.) Now, download this dataset which contains results from a number of participants in the task. Each row of the dataset contains the performance for one participant, with the first number their results on the congruent task and the second number their performance on the incongruent task.
 
 ####Personal Results
-    Congruent: 13.847
-    Incongruent: 30.938
+Congruent: 13.847<br/>
+Incongruent: 30.938
 
 ###3. Report some descriptive statistics regarding this dataset. Include at least one measure of central tendency and at least one measure of variability.
 
 
     # http://stackoverflow.com/questions/19410042/how-to-make-ipython-notebook-inline-matplotlib-graphics
     %matplotlib inline
-    
+
     import pandas as pd
     import numpy as np
     import matplotlib.pyplot as plt
     from scipy.stats import probplot, ttest_1samp
-    
+
     np.set_printoptions(suppress=True)
-    
+
     data = pd.read_csv('congruent-vs-incongruent.csv')
     data['delta'] = data['Incongruent'] - data['Congruent']
     congru = data['Congruent']
@@ -106,8 +106,8 @@ Now it’s your chance to try out the Stroop task for yourself. Go to this link,
 
 
     # http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.describe.html
-    
-    data.describe() 
+
+    data.describe()
 
 
 
@@ -187,7 +187,7 @@ The median and mean are also relatively close for each sample, meaning there is 
 
     # http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.hist.html
     # http://matplotlib.org/api/pyplot_api.html
-    
+
     plt.figure()
     congru.hist(color=(0, 0.8, 0.8, 0.5), bins=12, range=(0,40), label='Incongruent', stacked=False)
     incon.hist(color=(0.8, 0.8, 0, 0.5), bins=12, range=(0,40), label='Congruent', stacked=False)
@@ -199,7 +199,7 @@ The median and mean are also relatively close for each sample, meaning there is 
     plt.show()
     plt.close()
     print('note: green represents where the Congruent and Incongruent plots overlap')
-    
+
     plt.figure()
     delta.hist(color='red', bins=5, range=(0,25), label='Difference', stacked=False)
     plt.ylim((0,12))
@@ -227,10 +227,10 @@ The median and mean are also relatively close for each sample, meaning there is 
     fig = plt.figure()
     ax1 = fig.add_subplot(121)
     ax2 = fig.add_subplot(122)
-    
+
     array = probplot(congru, plot=ax1)
     array = probplot(incon, plot=ax2)
-    
+
     fig.suptitle('Q-Q Plot of Normality', fontsize=14)
     fig.tight_layout()
     fig.subplots_adjust(top=0.87)
@@ -238,7 +238,7 @@ The median and mean are also relatively close for each sample, meaning there is 
     ax2.set_title('Incongruent')
     plt.show()
     plt.close()
-    
+
     # plot of the difference
     plt.figure()
     array = probplot(delta, plot=plt)
